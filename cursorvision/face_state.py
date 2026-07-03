@@ -11,6 +11,9 @@ class FaceState:
     landmarks: list = field(default_factory=list)
 
     # Head rotation
+
+    facial_transform = None
+
     yaw: float = 0.0
     pitch: float = 0.0
     roll: float = 0.0
@@ -26,3 +29,5 @@ class FaceState:
     # Gaze
     gaze_x: float = 0.0
     gaze_y: float = 0.0
+    def get_landmark(self, landmark):
+        return self.landmarks[int(landmark)]

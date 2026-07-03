@@ -1,6 +1,6 @@
 from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
-from cursorvision.faceState import FaceState
+from cursorvision.face_state import FaceState
 import mediapipe as mp
 import cv2
 
@@ -35,5 +35,8 @@ class FaceTracker:
 
             state.detected = True
             state.landmarks = results.face_landmarks[0]
+
+            if results.facial_transformation_matrixes:
+                state.facial_transform = results.facial_transformation_matrixes[0]
 
         return state

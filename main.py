@@ -1,6 +1,8 @@
 from cursorvision.camera import Camera
 from cursorvision.tracker import FaceTracker
 from cursorvision.renderer import Renderer
+from cursorvision.debug_hud import DebugHUD
+from cursorvision.analyzer import Analyzer
 import cv2
 
 
@@ -10,6 +12,10 @@ def main():
     tracker = FaceTracker()
 
     renderer = Renderer()
+
+    hud = DebugHUD()
+
+    analyzer = Analyzer()
 
     print("FaceTracker loaded successfully!")
 
@@ -21,7 +27,11 @@ def main():
 
         state = tracker.detect(frame)
 
+        state = analyzer.analyze(state)
+
         frame = renderer.draw_landmarks(frame, state)
+
+        frame = hud.draw(frame,state)
 
         cv2.imshow("CursorVision", frame)
 
