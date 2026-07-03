@@ -1,5 +1,6 @@
 from cursorvision.camera import Camera
 from cursorvision.tracker import FaceTracker
+from cursorvision.renderer import Renderer
 import cv2
 
 
@@ -8,6 +9,8 @@ def main():
 
     tracker = FaceTracker()
 
+    renderer = Renderer()
+
     print("FaceTracker loaded successfully!")
 
     while True:
@@ -15,6 +18,10 @@ def main():
 
         if not success:
             break
+
+        results = tracker.detect(frame)
+
+        frame = renderer.draw_landmarks(frame, results)
 
         cv2.imshow("CursorVision", frame)
 
