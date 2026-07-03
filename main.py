@@ -19,9 +19,9 @@ def main():
         if not success:
             break
 
-        results = tracker.detect(frame)
+        state = tracker.detect(frame)
 
-        frame = renderer.draw_landmarks(frame, results)
+        frame = renderer.draw_landmarks(frame, state)
 
         cv2.imshow("CursorVision", frame)
 

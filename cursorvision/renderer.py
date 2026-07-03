@@ -3,26 +3,24 @@ import cv2
 
 class Renderer:
 
-    def draw_landmarks(self, frame, results):
+    def draw_landmarks(self, frame, state):
 
-        if not results.face_landmarks:
+        if not state.detected:
             return frame
 
         height, width, _ = frame.shape
 
-        for face in results.face_landmarks:
+        for landmark in state.landmarks:
 
-            for landmark in face:
+            x = int(landmark.x * width)
+            y = int(landmark.y * height)
 
-                x = int(landmark.x * width)
-                y = int(landmark.y * height)
-
-                cv2.circle(
-                    frame,
-                    (x, y),
-                    1,
-                    (0, 255, 0),
-                    -1
-                )
+            cv2.circle(
+                frame,
+                (x, y),
+                1,
+                (0, 255, 0),
+                -1
+            )
 
         return frame

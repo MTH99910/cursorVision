@@ -1,5 +1,6 @@
 from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
+from cursorvision.faceState import FaceState
 import mediapipe as mp
 import cv2
 
@@ -18,16 +19,21 @@ class FaceTracker:
         self.detector = vision.FaceLandmarker.create_from_options(options)
 
     def detect(self, frame):
-        # OpenCV uses BGR, MediaPipe expects RGB
+
         rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
-        # Convert to MediaPipe Image
         mp_image = mp.Image(
             image_format=mp.ImageFormat.SRGB,
             data=rgb
         )
 
-        # Run inference
         results = self.detector.detect(mp_image)
 
-        return results
+        state = FaceState()
+
+        if results.face_landmarks:
+
+            state.detected = True
+            state.landmarks = results.face_landmarks[0]
+
+        return state
