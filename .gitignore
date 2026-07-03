@@ -1,0 +1,21 @@
+# Virtual environment
+.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# IDE
+.vscode/
+
+# Linux
+*~
+
+# Model
+face_landmarker.task
+
+# Misc
+*.log
+
+# OBSIDIAN
+cursorVision_obs/
